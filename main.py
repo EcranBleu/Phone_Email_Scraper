@@ -8,14 +8,14 @@ phone_regex = re.compile(r'''
 # number formats: 123-456-7890, 456-7890 (no prefix), (123)-456-7890 (prefix in parentheses), 
 # 456-7890 ext 12345, ext. 12345, x12345
 
-(                               # One large group so that findall won't return a broken list of tuples (2 or more groups returns a list of tuples)
+(                               # One large group so that the 'findall' method doesn't return a broken list of tuples
 ((\d{3}) | (\(\d{3}\)))?        # area code (optional)
 (\s|-)                          # first separator
 \d{3}                           # first 3 digits
 -                               # separator
 \d{4}                           # last 4 digits
 (((ext(\.)?\s)|x)               # extension word-part(optional)
-(\d{2,5}))?                     #extension number-part (optional)
+(\d{2,5}))?                     # extension number-part (optional)
 )
 ''', re.VERBOSE)
 
@@ -41,10 +41,6 @@ extracted_email = email_regex.findall(text)
 
 all_phone_numbers = [phone_number[0] for phone_number in extracted_phone]
 all_emails = [email for email in extracted_email]
-
-
-print(all_phone_numbers)
-print(all_emails)
 
 # TODO: Copy the extracted email/phone to the clipboard
 
